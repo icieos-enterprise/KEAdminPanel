@@ -36,4 +36,9 @@
     transform: rotate(360deg);
   }
 }
-/* . */
+
+/* custom style changes in react toastify */
+.Toastify__close-button{
+  color: white;
+  opacity: 100;
+}
