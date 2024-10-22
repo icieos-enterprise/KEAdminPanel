@@ -15,3 +15,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.shadow-custom {
+  box-shadow: 0px 4px 21px rgba(85, 85, 85, 0.25); /* Custom drop shadow */
+}
+.bg-radial {
+  background: radial-gradient(circle, #3E0000 0%, #1F0000 50%, #000000 100%);
+}
+.custom-gradient{
+  background: linear-gradient(to bottom, #C21F3A, #720B0B);
+}
