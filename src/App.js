@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import AdminLogin from "./pages/Login/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard/Admindashboard"; // Import AdminDashboard
 
 
 
@@ -17,6 +18,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );
