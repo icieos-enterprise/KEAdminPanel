@@ -1,27 +1,22 @@
-import {
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from "react-router-dom";
-import AdminLogin from "./pages/Login/AdminLogin";
-import AdminDashboard from "./pages/AdminDashboard/Admindashboard"; // Import AdminDashboard
-import logo from './logo.svg';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import './App.css';
+import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./store";
+import PathRouter from "./pathRoutes";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 function App() {
-  return (
-    <>    
-      <Router>
-        <Routes>
-          <Route path="/" element={<AdminLogin />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        </Routes>
-      </Router>
-      <ToastContainer autoClose={2000} />
-    </>
-  );
+    return (
+        <>
+            <Provider store={store}>
+                <PersistGate persistor={persistor}>
+                    <PathRouter />
+                    <ToastContainer autoClose={2000} />
+                </PersistGate>
+            </Provider>
+        </>
+    );
 }
 
 export default App;

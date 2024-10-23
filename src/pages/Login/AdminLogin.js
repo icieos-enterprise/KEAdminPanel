@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { useCookies } from "react-cookie";
 import DOMPurify from 'dompurify';
 import { twMerge } from 'tailwind-merge';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
@@ -6,8 +8,12 @@ import Wrong from "../../assets/Vector.png";
 import showToast from "../../utils/toastNotifications";
 import { signIn } from "../../services/authService";
 import { isEmail, isNotEmpty } from "../../utils/utils";
+import { setToken } from "../../store";
 
 const AdminLogin = () => {
+
+    const dispatch =  useDispatch();    
+    const [, setCookie] = useCookies(['token']);
 
     const [credentials, setCredentials] = useState({
         email: "", password: ""
@@ -15,14 +21,16 @@ const AdminLogin = () => {
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPAssword] = useState(false);
 
-    const performSignIn = async() => {        
+    const performSignIn = async() => {
         if(isNotEmpty(credentials.email) && isNotEmpty(credentials.password)){
             if(isEmail(credentials.email)){
                 setLoading(true);
                 signIn(credentials)
                 .then(res => {
                     if(res.status === 200){
-                        showToast("success", "Signed in Successfully!")
+                        setCookie('token', res.data.accessToken, { path: '/', expires: new Date(Date.now() + 3600e3) });
+                        dispatch(setToken({token: res.data.accessToken}));
+                        showToast("success", "Signed in Successfully!");
                     }
                 })
                 .catch(err => {

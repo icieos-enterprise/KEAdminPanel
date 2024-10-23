@@ -1,9 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Sidebar from "../../components/AdminDashboard/Sidebar";
 import Footer from "../../components/AdminDashboard/Footer";  // Import Footer component
 import Header from '../../components/AdminDashboard/Header';
+import { persistor } from '../../store';
 
 const AdminDashboard = () => {
+  const auth = useSelector(state => state.auth);
+
+  console.log("this is the redux token from admin dashboard: " + auth.token);
   return (
     <div style={styles.dashboard}>
       <Header/>
@@ -11,6 +16,7 @@ const AdminDashboard = () => {
       
       <div style={styles.content}>
         {/* Dashboard content goes here */}
+        <button className='text-white' onClick={() => {persistor.purge()}}>purge</button>
       </div>
       <Footer />  {/* Include Footer component */}
     </div>
