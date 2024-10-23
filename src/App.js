@@ -2,14 +2,11 @@ import {
   Route,
   BrowserRouter as Router,
   Routes,
-  
 } from "react-router-dom";
 
 import AdminLogin from "./pages/Login/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard/Admindashboard"; // Import AdminDashboard
-import AdminDashboardUpload from "./pages/AdminDashboard/Admin-UploadPopup"; // Import Addmin Dashboard Upload Files Popup
-
-
+import AdminDashboardUpload from "./pages/AdminDashboard/Admin-UploadPopup"; // Import Admin Dashboard Upload Files Popup
 
 import logo from './logo.svg';
 import './App.css';
@@ -20,7 +17,8 @@ function App() {
       <Routes>
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/admin-uploads" element={<AdminDashboardUpload />} />
+        <Route path="/path-for-sample-item-1" element={<AdminDashboardUpload />} /> {/* Add route for Sample Item 1 */}
+        {/* Add more routes for other items as needed */}
       </Routes>
     </Router>
   );
