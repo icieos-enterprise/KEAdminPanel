@@ -7,7 +7,6 @@ module.exports = {
       extend: {
       backgroundImage: {
         'studio': "url('/src/assets/studio.png')",
-       
       },
       boxShadow: {
         'admin': '1px 4px 8px rgba(79, 79, 79, 0.25)', // Custom shadow with X, Y, blur, and opacity

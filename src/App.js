@@ -1,25 +1,22 @@
-import {
-  Route,
-  BrowserRouter as Router,
-  Routes,
-  
-} from "react-router-dom";
-
-import AdminLogin from "./pages/Login/AdminLogin";
-
-
-
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./store";
+import PathRouter from "./pathRoutes";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/admin-login" element={<AdminLogin />} />
-      </Routes>
-    </Router>
-  );
+    return (
+        <>
+            <Provider store={store}>
+                <PersistGate persistor={persistor}>
+                    <PathRouter />
+                    <ToastContainer autoClose={2000} />
+                </PersistGate>
+            </Provider>
+        </>
+    );
 }
 
 export default App;
