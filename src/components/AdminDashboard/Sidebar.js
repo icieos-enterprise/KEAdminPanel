@@ -12,9 +12,9 @@ const Sidebar = () => {
 
   const items = [
     { id: 1, name: 'Home', path: '/admin-dashboard' }, // Add path for navigation
-    { id: 2, name: 'Sample item 1', path: '/path-for-sample-item-1' },
-    { id: 3, name: 'Sample item 2', path: '/path-for-sample-item-1' },
-    { id: 4, name: 'Sample item 3', path: '/path-for-sample-item-1' },
+    { id: 2, name: 'Upload Clients', path: '/upload-clients' },
+    { id: 3, name: 'Upload Productions', path: '/upload-productions' },
+    { id: 4, name: 'Upload Lyrics', path: '/upload-lyrics' },
   ];
 
   return (

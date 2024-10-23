@@ -1,8 +1,13 @@
 import React, { useState, useRef } from "react";
 import UploadIcon from "../../assets/AdminDashboard/admin-dashboard-uploadfilesicon.svg"; // Import SVG file for upload button
 import CloseIcon from "../../assets/AdminDashboard/Admin-closeIcon.svg"; // Import SVG file for close button
+import showToast from "../../utils/toastNotifications";
+import { uploadClientsFile, uploadLyricsFile, uploadProductionFile } from "../../services/uploadFileService";
+import { useSelector } from "react-redux";
+import { capitalize } from "../../utils/utils";
 
-const UploadPopup = () => {
+const UploadPopup = (props) => {
+    const auth = useSelector(state => state.auth);
     const [isOpen, setIsOpen] = useState(true);
     const fileInputRef = useRef(null); // Reference for the file input
     const [file, setFile] = useState(null);
@@ -19,7 +24,56 @@ const UploadPopup = () => {
         return null; // Don't render anything if the popup is closed
     }
 
-    console.log(file);
+    const uploadFileHandler = () => {
+      if(file && 
+        (file.type === "application/vnd.ms-excel" || file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") &&
+        (file.name.endsWith('.xls') || file.name.endsWith('.xlsx'))
+      ){
+        const formData = new FormData();
+        formData.append('file', file);
+
+        if(props.type === "clients"){
+          uploadClientsFile(formData, auth.token)
+          .then((res) => {
+            if(res.status === 201){
+              showToast("success", "FIle uploaded Successfully!.")
+            }else{
+              showToast("error", "Something Went Wrong.")
+            }
+          })
+          .catch(err => console.log(err))
+          .finally(() => {setFile(null)});
+        }
+        else if(props.type === "productions"){
+          uploadProductionFile(formData, auth.token)
+          .then((res) => {
+            if(res.status === 201){
+              showToast("success", "FIle uploaded Successfully!.")
+            }else{
+              showToast("error", "Something Went Wrong.")
+            }
+          })
+          .catch(err => console.log(err))
+          .finally(() => {setFile(null)});
+        }
+        else if(props.type === "lyrics"){
+          uploadLyricsFile(formData, auth.token)
+          .then((res) => {
+            if(res.status === 201){
+              showToast("success", "FIle uploaded Successfully!.")
+            }else{
+              showToast("error", "Something Went Wrong.")
+            }
+          })
+          .catch(err => console.log(err))
+          .finally(() => {setFile(null)});
+        }
+
+      }else{
+        showToast("error", "Upload an Excel File To Upload");
+      }
+    }
+
     return (
         <div className="inset-0 flex items-center justify-center bg-black bg-opacity-40 -mr-32 mt-5">
             <div
@@ -30,13 +84,13 @@ const UploadPopup = () => {
             >
                 {/* Title */}
                 <h1 className="text-white font-jost text-[35px] text-left font-semibold space-x-10">
-                    Sample Title Type 1
+                    {props.type ? "Upload " + capitalize(props.type) + " Information" : "Upload Files"}
                 </h1>
 
                 {/* Inner Box */}
                 <div className="bg-[#161616] shadow-[0px_0px_10px_#301212] mt-8 rounded-md p-4 flex flex-col w-[700px] ml-96 space-y-6 space-x-8 relative">
                     {/* Close Button */}
-                    <div
+                    {/* <div
                         className="absolute top-4 right-4 cursor-pointer"
                         onClick={closePopup}
                     >
@@ -45,11 +99,11 @@ const UploadPopup = () => {
                             alt="Close Icon"
                             className="w-6 h-6"
                         />
-                    </div>
+                    </div> */}
 
                     {/* Inner Box Title */}
                     <h2 className="text-white font-jost text-[24px] font-semibold mb-4 text-left ml-8 mt-4">
-                        Upload files
+                        Upload file
                     </h2>
 
                     {/* Upload Box */}
@@ -103,6 +157,7 @@ const UploadPopup = () => {
                                 background:
                                     "linear-gradient(180deg, #C21F3A 0%, #720B0B 100%)",
                             }}
+                            onClick={uploadFileHandler}
                         >
                             Upload
                         </button>

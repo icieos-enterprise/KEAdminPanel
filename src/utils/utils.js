@@ -7,3 +7,10 @@ export function isEmail(value) {
 export function isNotEmpty(value) {
     return value.trim() !== "";
 }
+
+export function capitalize(param) {
+    if(param?.length > 0){
+        let result = param.charAt(0).toUpperCase() + param.slice(1);
+        return result;
+    }else{return ''};
+}

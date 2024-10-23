@@ -11,10 +11,9 @@ const api = axios.create({
 // Use axios interceptors to include the token in all requests
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("token"); // Get token from localStorage
-        console.log("retrieving token", token);
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`; // Attach token to the request
+        if (config?.token) {
+            config.headers.Authorization = `Bearer ${config.token}`; // Attach token to the request
+            delete config.token;
         }
         return config;
     },

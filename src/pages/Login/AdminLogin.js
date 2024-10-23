@@ -26,11 +26,13 @@ const AdminLogin = () => {
             if(isEmail(credentials.email)){
                 setLoading(true);
                 signIn(credentials)
-                .then(res => {
-                    if(res.status === 200){
-                        setCookie('token', res.data.accessToken, { path: '/', expires: new Date(Date.now() + 3600e3) });
+                .then(res => {                    
+                    if(res.status === 200 && !(res.data?.user?.role.toLowerCase().localeCompare("admin"))){
+                        setCookie('token', "Active user session", { path: '/', expires: new Date(Date.now() + 3600e3) });
                         dispatch(setToken({token: res.data.accessToken}));
                         showToast("success", "Signed in Successfully!");
+                    }else{
+                        showToast("error", "Only Admin Users Are Accessible");
                     }
                 })
                 .catch(err => {
@@ -41,7 +43,7 @@ const AdminLogin = () => {
                 showToast("error", "Enter an Valid Email")
             }
         }else{
-            showToast("error", "Fill email and the password");
+            showToast("error", "Fill Email and The Password");
         }
     }
 

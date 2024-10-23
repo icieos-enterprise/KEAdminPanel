@@ -4,7 +4,7 @@ import Footer from "../../components/AdminDashboard/Footer";  // Import Footer c
 import Header from '../../components/AdminDashboard/Header';
 import UploadPopup from '../../components/AdminDashboard/UploadPopup';  // Import UploadPopup component
 
-const AdminDashboard = () => {
+export const UploadClients = () => {
   return (
     <div style={styles.dashboard}>
       <Header />
@@ -16,7 +16,47 @@ const AdminDashboard = () => {
 
       {/* Center-right side popup */}
       <div style={styles.uploadPopupContainer}>
-        <UploadPopup />
+        <UploadPopup type="clients"/>
+      </div>
+
+      <Footer />  {/* Include Footer component */}
+    </div>
+  );
+};
+
+export const UploadProductions = () => {
+  return (
+    <div style={styles.dashboard}>
+      <Header />
+      <Sidebar />
+      
+      <div style={styles.content}>
+        {/* Dashboard content goes here */}
+      </div>
+
+      {/* Center-right side popup */}
+      <div style={styles.uploadPopupContainer}>
+        <UploadPopup type="productions"/>
+      </div>
+
+      <Footer />  {/* Include Footer component */}
+    </div>
+  );
+};
+
+export const UploadLyrics = () => {
+  return (
+    <div style={styles.dashboard}>
+      <Header />
+      <Sidebar />
+      
+      <div style={styles.content}>
+        {/* Dashboard content goes here */}
+      </div>
+
+      {/* Center-right side popup */}
+      <div style={styles.uploadPopupContainer}>
+        <UploadPopup type="lyrics"/>
       </div>
 
       <Footer />  {/* Include Footer component */}
@@ -44,4 +84,4 @@ const styles = {
   },
 };
 
-export default AdminDashboard;
+// export default AdminDashboard;
