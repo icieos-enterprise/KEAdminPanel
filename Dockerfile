@@ -17,7 +17,7 @@ COPY . .
 COPY .env .env
 
 # Step 6: Expose the port your app runs on (replace 3000 with your app's port)
-EXPOSE 3000
+EXPOSE 3001
 
 # Step 7: Define the command to run your app
 CMD ["npm", "start"]
